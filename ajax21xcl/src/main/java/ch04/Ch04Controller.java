@@ -248,12 +248,13 @@ public class Ch04Controller {
 	@GetMapping("/ch04/_03/getBookImage")
 	public ResponseEntity<byte[]> getBookImage(@RequestParam("no") Integer no) {
 		ResponseEntity<byte[]> re = null;
+		HttpHeaders headers = new HttpHeaders();
+
 		BookBean bean = bookService.getBook(no);
 		String filename = bean.getFileName();
 		Blob blob = bean.getCoverImage();
 		String mimeType = ctx.getMimeType(filename);
 		MediaType mediaType = MediaType.valueOf(mimeType);
-		HttpHeaders headers = new HttpHeaders();
 		try {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			InputStream is = blob.getBinaryStream();
