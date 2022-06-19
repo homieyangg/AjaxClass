@@ -12,10 +12,10 @@ import ch04._02.dao.EmployeeDao;
 
 @Repository
 public class EmployeeDaoImpl_Hibernate implements EmployeeDao {
-
-	//@Autowired
+	
 	SessionFactory factory;
 	
+//	@Autowired
 	public EmployeeDaoImpl_Hibernate(SessionFactory factory) {
 		this.factory = factory;
 	}
@@ -24,7 +24,7 @@ public class EmployeeDaoImpl_Hibernate implements EmployeeDao {
 	public void save(Employee e) {
 		Session session = factory.getCurrentSession();
 		session.save(e);
-
+		
 	}
 
 	@Override
@@ -36,8 +36,8 @@ public class EmployeeDaoImpl_Hibernate implements EmployeeDao {
 	@Override
 	public List<Employee> findAll() {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM Employee";
-		return session.createQuery(hql, Employee.class)
-				.getResultList();
+		String  hql = "FROM Employee" ;
+		return  session.createQuery(hql, Employee.class)
+		       .getResultList();
 	}
 }

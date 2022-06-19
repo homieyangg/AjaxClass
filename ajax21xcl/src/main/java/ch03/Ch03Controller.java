@@ -70,8 +70,8 @@ public class Ch03Controller {
 
 	@GetMapping(value="/ch03/_05/ShowCityTime", produces = "text/plain;charset=UTF-8")
 	public @ResponseBody String cityTime(
-			@RequestParam("city") String city,	
-			@RequestParam("cityName") String cityName	
+			@RequestParam String city,	
+			@RequestParam String cityName	
 		) {
 		String responseMsg = "";
 		TimeZone tz = TimeZone.getTimeZone(city);

@@ -32,9 +32,7 @@ public class Ex02Controller {
 	EmployeeService employeeService;
 	ServletContext ctx;
 	
-	
-	// @Autowired
-	
+	//@Autowired
 	public Ex02Controller(EmployeeService employeeService, ServletContext ctx) {
 		super();
 		this.employeeService = employeeService;
@@ -45,42 +43,41 @@ public class Ex02Controller {
 	public String ex02index() {
 		return "ex02/index";
 	}
-
-
-	@GetMapping(value = "/ex02req01", produces = "text/html; charset = UTF-8")
+	
+	@GetMapping(value="/ex02req01", produces="text/html; charset=UTF-8")
 	public @ResponseBody String req01() {
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH時mm分");
-		return "現在時間" + simpleDateFormat.format(new Date());
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH時mm分ss秒");
+		
+		return "現在時間: " + sdf.format(new Date());
 	}
-
-	@GetMapping(value = "/ex02req02/{key}", produces = "application/json; charset = UTF-8")
-	public @ResponseBody Employee req02(@PathVariable("key") Long key) {
+	
+	@GetMapping(value="/ex02req02/{key}", produces="application/json; charset=UTF-8")
+	public @ResponseBody Employee req02(@PathVariable("key")  Long key  ) {
 		return employeeService.findById(key);
 	}
 
-	@GetMapping(value = "/ex02req03", produces = "application/json; charset = UTF-8")
+	@GetMapping(value="/ex02req03", produces="application/json; charset=UTF-8")
 	public @ResponseBody List<Employee> req03() {
 		return employeeService.findAll();
 	}
 	
-	@GetMapping(value = "/ex02req04", produces = "application/json; charset = UTF-8")
+	@GetMapping(value="/ex02req04", produces="application/json; charset=UTF-8")
 	public @ResponseBody Map<String, Object> req04() {
 		Map<String, Object> map = new HashMap<>();
-		map.put("hello","kitty");
-		map.put("score",100);
-		map.put("vat",0.05);
-		map.put("lotteryNumber",new Integer[] {20, 25, 27, 33, 34, 35});
+		map.put("hello", "Kitty");
+		map.put("score", 100);
+		map.put("vat", 0.05);
+		map.put("lotteryNumber", new Integer[] {20, 25, 27, 33, 34, 35});
 		return map;
 	}
-	/* 第一種作法(取圖片) */
-	@GetMapping("/ex02/req04/getImage")
+	
+	@GetMapping("/ex04/req04/geImage")
 	public ResponseEntity<byte[]> getImage(@RequestParam("noo") Long no) {
 		ResponseEntity<byte[]> re = null;
 		HttpHeaders headers = new HttpHeaders();
-
 		Employee employee = employeeService.findById(no);
 		Blob blob = employee.getImage();
-		
 		String mimeType = employee.getMimeType();
 		MediaType mediaType = MediaType.valueOf(mimeType);
 		try {
@@ -99,17 +96,15 @@ public class Ex02Controller {
 		}
 		return re;
 	}
-	/* 第二種作法(路徑變數) */
-	@GetMapping("/ex02/req04/getImage2/{id}")
+	
+	@GetMapping("/ex04/req04/geImage2/{id}")
 	public ResponseEntity<byte[]> getImage2(
 			@PathVariable("id") Long no
 			) {
 		ResponseEntity<byte[]> re = null;
 		HttpHeaders headers = new HttpHeaders();
-		
 		Employee employee = employeeService.findById(no);
 		Blob blob = employee.getImage();
-		
 		String mimeType = employee.getMimeType();
 		MediaType mediaType = MediaType.valueOf(mimeType);
 		try {
@@ -128,14 +123,15 @@ public class Ex02Controller {
 		}
 		return re;
 	}
-
-// public @ResponseBody String timeNow() {
-//  return "";
-// }
-// 
-// @GetMapping("/variousData")
-// public @ResponseBody Map<String, Object> variousData() {
-//  return null;
-// }
-
+	
+//	public @ResponseBody String timeNow() {
+//		return "";
+//	}
+//	
+//	@GetMapping("/variousData")
+//	public @ResponseBody Map<String, Object> variousData() {
+//		return null;
+//	}
+//	
+	
 }

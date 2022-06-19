@@ -29,6 +29,7 @@
 				}
 				xhr.open('GET', "<c:url value='/ch01/_01/HelloAjaxOO'  />", true);   // true: 表示非同步
 				xhr.send();
+				//...
 			} else {
 				div1.innerHTML = "<h3>您的瀏覽器不支援Ajax</h3>";
 			}

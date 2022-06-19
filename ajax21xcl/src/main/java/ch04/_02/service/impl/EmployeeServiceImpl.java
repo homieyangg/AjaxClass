@@ -8,14 +8,13 @@ import org.springframework.transaction.annotation.Transactional;
 import ch04.Employee;
 import ch04._02.dao.EmployeeDao;
 import ch04._02.service.EmployeeService;
-
 @Service
 @Transactional
 public class EmployeeServiceImpl implements EmployeeService {
 
 	EmployeeDao dao;
-
-	// @Autowired
+	
+	//@Autowired
 	public EmployeeServiceImpl(EmployeeDao dao) {
 		this.dao = dao;
 	}
@@ -34,8 +33,5 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public List<Employee> findAll() {
 		return dao.findAll();
 	}
-
-
-
 
 }

@@ -7,8 +7,7 @@ import ch04.Employee;
 public interface EmployeeDao {
 
 	void save(Employee e);
-
 	Employee findById(Long id);
-	
-	List<Employee> findAll();
+	List<Employee>  findAll();
+
 }

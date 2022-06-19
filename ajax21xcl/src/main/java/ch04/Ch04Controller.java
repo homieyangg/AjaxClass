@@ -111,6 +111,7 @@ public class Ch04Controller {
 	}
 
 	@PostMapping("/ch04/_02/CheckMemberId")
+	              
 	public @ResponseBody Map<String, String> checkMemberId(@RequestParam(value = "id") String memberId) {
 		String id = "";
 		Map<String, String> map = new HashMap<>();
@@ -245,13 +246,17 @@ public class Ch04Controller {
 		return books;
 	}
 
+	/**
+	 * @param no
+	 * @return
+	 */
 	@GetMapping("/ch04/_03/getBookImage")
 	public ResponseEntity<byte[]> getBookImage(@RequestParam("no") Integer no) {
 		ResponseEntity<byte[]> re = null;
 		HttpHeaders headers = new HttpHeaders();
-
+		
 		BookBean bean = bookService.getBook(no);
-		String filename = bean.getFileName();
+		String filename = bean.getFileName();   // kitty.gif
 		Blob blob = bean.getCoverImage();
 		String mimeType = ctx.getMimeType(filename);
 		MediaType mediaType = MediaType.valueOf(mimeType);
@@ -273,7 +278,8 @@ public class Ch04Controller {
 	}
 
 	@GetMapping("/ch04/_05/getBooksByPubllisher.json")
-	public @ResponseBody Map<String, Object> getBooksByPubllisher(@RequestParam("publisherId") Integer publisherId) {
+	public @ResponseBody Map<String, Object> getBooksByPubllisher(
+			@RequestParam("publisherId") Integer publisherId) {
 		Map<String, Object> mapData = new HashMap<>();
 		List<BookBean> list = bookService.getBooksByPublisherId(publisherId);
 		mapData.put("bookBeanList", list);
